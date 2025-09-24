@@ -28,7 +28,7 @@ jobs:
 
       # Step 4: Run new container
       - name: Run container
-        run: docker run -d -p 8083:80 --name my-cv-container my-cv:latest
+        run: docker run -d -p 8084:80 --name my-cv-container my-cv:latest
 
       # Step 5: Test deployment
       - name: Test if CV is served
