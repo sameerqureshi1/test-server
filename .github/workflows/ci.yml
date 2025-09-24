@@ -31,14 +31,13 @@ jobs:
         run: docker run -d -p 8084:80 --name my-cv-container my-cv:latest
 
       # Step 5: Test deployment
-      - name: Test if CV is served
-        run: |
-          # Wait a few seconds for Nginx to start
-          sleep 5
-          # Check if index.html contains the word 'CV' (adjust to your content)
-          if curl -s http://localhost | grep -q "CV"; then
-            echo "Test Passed: CV is served correctly"
-          else
-            echo "Test Failed: CV not found"
-            exit 1
-          fi
+        - name: Test if site is served
+          run: |
+            sleep 5
+            if curl -s http://localhost:8083 | grep -q "Hello from Self-Hosted Runner"; then
+              echo "Test Passed: site is served correctly"
+             else
+              echo "Test Failed: content not found"
+             exit 1
+            fi
+
