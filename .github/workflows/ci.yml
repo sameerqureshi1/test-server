@@ -33,12 +33,14 @@ jobs:
       # Step 5: Test deployment
       - name: Test if CV is served
         run: |
-          # Wait a few seconds for Nginx to start
           sleep 5
-          # Check if index.html contains the word 'CV' (adjust to your content)
+          # Hit the correct port (8084)
           if curl -s http://localhost:8084 | grep -q "CV"; then
-            echo "Test Passed: CV is served correctly"
+            echo "✅ Test Passed: CV is served correctly"
           else
-            echo "Test Failed: CV not found"
+            echo "❌ Test Failed: CV not found"
+            echo "Page content was:"
+            curl -s http://localhost:8084
             exit 1
           fi
+ 
