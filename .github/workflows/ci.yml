@@ -28,19 +28,19 @@ jobs:
 
       # Step 4: Run new container
       - name: Run container
-        run: docker run -d -p 8084:80 --name my-cv-container my-cv:latest
+        run: docker run -d -p 8083:80 --name my-cv-container my-cv:latest
 
       # Step 5: Test deployment
       - name: Test if CV is served
         run: |
           sleep 5
           # Hit the correct port (8084)
-          if curl -s http://localhost:8084 | grep -q "CV"; then
+          if curl -s http://localhost:8083 | grep -q "CV"; then
             echo "✅ Test Passed: CV is served correctly"
           else
             echo "❌ Test Failed: CV not found"
             echo "Page content was:"
-            curl -s http://localhost:8084
+            curl -s http://localhost:8083
             exit 1
           fi
  
