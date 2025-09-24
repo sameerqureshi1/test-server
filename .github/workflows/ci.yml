@@ -1,0 +1,44 @@
+name: Build, Deploy & Test CV
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy-test:
+    runs-on: self-hosted
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Build Docker image
+      - name: Build Docker image
+        run: docker build -t my-cv:latest .
+
+      # Step 3: Stop & remove old container if it exists
+      - name: Stop old container
+        run: |
+          if [ "$(docker ps -q -f name=my-cv-container)" ]; then
+            docker stop my-cv-container
+            docker rm my-cv-container
+          fi
+
+      # Step 4: Run new container
+      - name: Run container
+        run: docker run -d -p 8083:80 --name my-cv-container my-cv:latest
+
+      # Step 5: Test deployment
+      - name: Test if CV is served
+        run: |
+          # Wait a few seconds for Nginx to start
+          sleep 5
+          # Check if index.html contains the word 'CV' (adjust to your content)
+          if curl -s http://localhost | grep -q "CV"; then
+            echo "Test Passed: CV is served correctly"
+          else
+            echo "Test Failed: CV not found"
+            exit 1
+          fi
