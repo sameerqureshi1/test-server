@@ -34,7 +34,7 @@ jobs:
       - name: Test if CV is served
         run: |
           sleep 5
-          # Hit the correct port (8084)
+          # Hit the correct port (8083)
           if curl -s http://localhost:8083 | grep -q "CV"; then
             echo "✅ Test Passed: CV is served correctly"
           else
