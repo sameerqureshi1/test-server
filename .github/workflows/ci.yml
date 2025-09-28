@@ -1,4 +1,4 @@
-name: Build, Deploy & Test CV
+name: Build, Deploy , Test CV
 
 on:
   push:
