@@ -1,7 +1,7 @@
 # Deploying CV Website with GitHub Self-Hosted Runner on AWS EC2
 
 This repository (`test-server`) demonstrates how to deploy a simple **CV website** to an **AWS EC2 instance** using a **GitHub self-hosted runner**. The deployment is automated with GitHub Actions, Docker, and Nginx.
-
+---
 
 ## 🚀 Objective
 
